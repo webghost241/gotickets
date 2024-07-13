@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gotickets</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <main class="">
+        <nav class="bg-gray-800 py-4">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <a href="/" class="text-white text-2xl font-semibold">Event & Blog App</a>
+        </div>
+        <div class="flex items-center">
+          <a href="/" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+          <%= link_to 'Events', events_path, class: "text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>
+          <%= link_to 'Blog Posts', blog_posts_path, class: "text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>
+        </div>
+      </div>
+    </div>
+  </nav>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+    </main>
+  </body>
+</html>
