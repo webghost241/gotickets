@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'users/show'
   devise_for :users
   
   resources :events do
@@ -6,7 +7,12 @@ Rails.application.routes.draw do
     resources :reviews, only: [:create, :update, :destroy]
   end
 
-  resources :blog_posts
+  resources :blogs
   
   root to: 'events#index'
+  get '/about', to: 'pages#about'
+  get '/contact', to: 'pages#contact'
+
+    # For user profile
+    resources :users, only: [:show]
 end
