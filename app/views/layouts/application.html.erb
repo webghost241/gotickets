@@ -9,41 +9,20 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <link href="../path/to/src/pagedone.css"/>
   </head>
 
   <body>
     <main class="">
-
-<nav class="bg-white shadow-md">
-    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-      <div class="text-lg font-semibold">
-        <%= link_to 'GoTickets', root_path, class: 'text-gray-800 hover:text-blue-500' %>
-      </div>
-      <div>
-        <%= link_to 'Events', events_path, class: 'ml-4 text-gray-700 hover:text-blue-500' %>
-        <%= link_to 'Blogs', blogs_path, class: 'ml-4 text-gray-700 hover:text-blue-500' %>
-        <%= link_to 'About', about_path, class: 'ml-4 text-gray-700 hover:text-blue-500' %>
-        <%= link_to 'Contact', contact_path, class: 'ml-4 text-gray-700 hover:text-blue-500' %>
-      </div>
-      <div>
-        <% if user_signed_in? %>
-          <%= link_to user_path(current_user), class: 'inline-block' do %>
-            <img src="https://images.unsplash.com/photo-1589133770133-d625132e65c1?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="User" class="w-10 h-10 rounded-full">
-          <% end %>
-          <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'ml-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md' %>
-        <% else %>
-          <%= link_to 'Login', new_user_session_path, class: 'ml-4 text-gray-700 hover:text-blue-500' %>
-          <%= link_to 'Sign Up', new_user_registration_path, class: 'ml-4 text-gray-700 hover:text-blue-500' %>
-        <% end %>
-      </div>
-    </div>
-  </nav>
-
-
-
+      <%# NAVIGATION BAR SECTION%>
+      <%= render 'shared/navbar' %>
+      <%# ALERTS SECTION %>
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
+      <%# FIELD LINK SECTION %>
       <%= yield %>
+      <%# FOOTER SECTION %>
+      <%= render 'shared/footer' %>
     </main>
   </body>
 </html>
