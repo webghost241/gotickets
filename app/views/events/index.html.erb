@@ -1,4 +1,4 @@
-<section class="bg-white dark:bg-gray-900">
+<div class="bg-white dark:bg-gray-900">
     <div class="container px-6 py-16 mx-auto text-center">
         <div class="max-w-lg mx-auto">
             <h1 class="text-3xl font-semibold text-gray-800 dark:text-white lg:text-4xl">Your go to place to find memorable events.</h1>
@@ -18,64 +18,78 @@
             </div>
         </div>
     </div>
-</section>
-<section class="bg-white dark:bg-gray-900">
+</div>
+<div class="bg-white dark:bg-gray-900">
     <div class="container px-6 mx-auto text-center">
       <div class="flex items-center justify-between w-full">
           <header>
             <h2 class="text-xl font-bold text-white sm:text-3xl">Events Collection</h2>
           </header>
           <span class="text-white">
-              <%= link_to 'New Event', new_event_path, class: "inline-block bg-green-500 text-white px-4 py-2 rounded-lg mt-4 hover:bg-indigo-700" if user_signed_in? %>
+            <div class="flex bg-green-500 text-white px-4 py-2 rounded-lg mt-4 hover:bg-indigo-700">
+              <%= link_to 'New Event', new_event_path, class: "" if user_signed_in? %>
               <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
               </svg>
+            </div>
           </span>
       </div>
     </div>
-</section>
+</div>
 
 <%# DISPLAY EVENT SECTION %>
 <%# Section 1 %>
-<section class="dark:bg-gray-900">
+<div class="dark:bg-gray-900">
   <div class="mx-auto max-w-screen-xl px-4 sm:px-6 sm:py-12 lg:px-8">
-
-
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <% @events.each do |event| %>
-          <div class="bg-white shadow-md rounded-lg p-6 mb-6">
-            <% if event.image_url.present? %>
-              <%= image_tag event.image_url, alt: event.title, class: "w-full h-64 object-cover rounded" %>
-            <% else %>
-              <%= image_tag "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", alt: "Default Image", class: "w-full h-64 object-cover rounded" %>
-            <% end %>
-            <h2 class="text-2xl font-semibold mb-2"><%= link_to event.title, event %></h2>
-            <p class="text-gray-600 mb-2"><%= event.description %></p>
-            <p class="text-gray-600 mb-2"><%= event.location %></p>
-            <p class="text-gray-600 mb-2"><%= event.date.strftime('%B %d, %Y') %></p>
+      <%# EVENT CARDS %>
+    <% @events.each do |event| %>
+      <div class="max-w-2xl overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+        <% if event.image_url.present? %>
+          <%= image_tag event.image_url, alt: event.title, class: "object-cover w-full h-64" %>
+        <% else %>
+          <%= image_tag "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", alt: "Default Image", class: "object-cover w-full h-64" %>
+        <% end %>
+
+        <div class="p-6">
+          <div>
+            <span class="text-xs font-medium text-blue-600 uppercase dark:text-blue-400">Event</span>
+            <a href="<%= event_path(event) %>" class="block mt-2 text-xl font-semibold text-gray-800 transition-colors duration-300 transform dark:text-white hover:text-gray-600 hover:underline" tabindex="0" role="link"><%= event.title %></a>
+            <p class="mt-2 text-sm text-gray-600 dark:text-gray-400"><%= event.description %></p>
+          </div>
+
+          <div class="mt-4">
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2"><%= event.location %></p>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2"><%= event.date.strftime('%B %d, %Y') %></p>
 
             <% if user_signed_in? %>
               <% if current_user == event.user %>
                 <div class="mt-4">
-                  <%= link_to 'Edit', edit_event_path(event), class: "text-indigo-600 hover:text-indigo-700 mr-4" %>
-                  <%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-red-600 hover:text-red-700" %>
+                  <%= link_to 'Edit', edit_event_path(event), class: "text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 mr-4" %>
+                  <%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300" %>
                 </div>
               <% else %>
                 <% if event.bookings.where(user: current_user).exists? %>
-                  <%= link_to 'Cancel Booking', event_booking_path(event, event.bookings.find_by(user: current_user)), method: :delete, class: "text-red-600 hover:text-red-700" %>
+                  <%= link_to 'Cancel Booking', event_booking_path(event, event.bookings.find_by(user: current_user)), method: :delete, class: "text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300" %>
                 <% else %>
-                  <%= link_to 'Book Event', event_bookings_path(event), method: :post, class: "text-indigo-600 hover:text-indigo-700" %>
+                  <%= link_to 'Book Event', event_bookings_path(event), method: :post, class: "text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300" %>
                 <% end %>
               <% end %>
             <% end %>
           </div>
-        <% end %>
-    </ul>
+
+          <div class="mt-4">
+            <div class="flex items-center">
+              <div class="flex items-center">
+                <img class="object-cover h-10 rounded-full" src="https://randomuser.me/api/portraits/men/1.jpg" alt="Avatar">
+                <a href="#" class="mx-2 font-semibold text-gray-700 dark:text-gray-200" tabindex="0" role="link"><%= event.user.email.split('@').first.capitalize %></a>
+              </div>
+              <span class="mx-1 text-xs text-gray-600 dark:text-gray-300"><%= event.created_at.strftime('%d %b %Y') %></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    </div>
   </div>
-</section>
-
-
-
-
-  <%= link_to 'New Event', new_event_path, class: "inline-block bg-indigo-600 text-white px-4 py-2 rounded-lg mt-4 hover:bg-indigo-700" if user_signed_in? %>
 </div>
