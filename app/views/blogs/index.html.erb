@@ -1,6 +1,50 @@
-<h1>Blogs</h1>
+<section class="bg-white dark:bg-gray-900">
+    <div class="container px-6 py-10 mx-auto">
+        <div class="flex items-center justify-between w-full">
+          <header>
+            <h2 class="text-xl font-bold text-white sm:text-3xl">Event Blog</h2>
+          </header>
+          <span class="text-white">
+            <div class="flex bg-green-500 text-white px-4 py-2 rounded-lg mt-4 hover:bg-indigo-700">
+              <%= link_to 'New Blog', new_blog_path, class: "" if user_signed_in? %>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              </svg>
+            </div>
+          </span>
+        </div>
+      <% @blogs.each do |blog| %>
+        <div class="mt-8 lg:-mx-6 lg:flex lg:items-center">
+            <img class="object-cover w-full lg:mx-6 lg:w-1/4 rounded-xl h-48 lg:h-60" src="https://images.unsplash.com/photo-1542435503-956c469947f6?q=80&w=2874&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"alt="">
+            <div class="mt-6 lg:w-1/2 lg:mt-0 lg:mx-6 ">
+                <p class="text-sm text-blue-500 uppercase">category</p>
+                <div href="#" class="block mt-4 text-2xl font-semibold text-gray-800 hover:underline dark:text-white">
+                    <%= link_to blog.title, blog_path(blog) %>
+                </div>
+                <p class="mt-3 text-sm text-gray-500 dark:text-gray-300 md:text-sm">
+                    <%= truncate(blog.content, length: 100) %>
+                </p>
+                <%= link_to 'Read more', blog, class: "inline-block mt-2 text-blue-500 underline hover:text-blue-400" if user_signed_in? %>
 
-<%= link_to 'New Blog', new_blog_path, class: "btn btn-primary" %>
+
+                <div class="flex justify-between items-end">
+                  <div class="flex items-center mt-6">
+                    <img class="object-cover object-center w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1517842536804-bf6629e2c291?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+                    <div class="mx-4">
+                        <h1 class="text-sm text-gray-700 dark:text-gray-200">Jane Doe</h1>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Event Specialist</p>
+                    </div>
+                  </div>
+                    <div class="flex items-center mt-6 gap-x-4 shrink-0 lg:mt-0">
+                      <button class="px-2 py-1 text-xs font-semibold text-white uppercase transition-colors duration-300 transform bg-gray-800 rounded hover:bg-gray-700 dark:hover:bg-gray-600 focus:bg-gray-700 dark:focus:bg-gray-600 focus:outline-none"><%= link_to 'Edit', edit_blog_path(blog) %></button>
+                      <button class="px-2 py-1 text-xs font-semibold text-white uppercase transition-colors duration-300 transform bg-gray-800 rounded hover:bg-gray-700 dark:hover:bg-gray-600 focus:bg-gray-700 dark:focus:bg-gray-600 focus:outline-none"><%= link_to 'Back to Home', root_path %></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      <% end %>
+    </div>
+</section>
 
 <div class="blogs">
   <% @blogs.each do |blog| %>
@@ -17,10 +61,9 @@
         </ul>
       <% end %>
 
-      <%= link_to 'Edit', edit_blog_path(blog), class: "btn btn-secondary" %>
+      
       <%= link_to 'Delete', blog, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
     </div>
   <% end %>
 </div>
 
-<%= link_to 'Back to Home', root_path, class: "btn btn-secondary" %>
