@@ -46,12 +46,18 @@
         <% if user_signed_in? %>
           <h3 class="text-lg font-semibold mb-2">Leave a Review</h3>
           <%= form_with(model: [@event, @event.reviews.build], local: true) do |form| %>
+              <div class="field">
+                <%= form.label :rating %>
+                <%= form.number_field :rating, in: 1..5 %>
+              </div>
             <div class="mb-4">
               <%= form.label :content, class: "block text-gray-700" %>
               <%= form.text_area :content, class: "form-textarea mt-1 block w-full", rows: 3 %>
             </div>
             <%= form.submit "Submit Review", class: "bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md" %>
           <% end %>
+        <% else %>
+          <p>Please <%= link_to 'sign in', new_user_session_path %> to add a review.</p>
         <% end %>
       </div>
     </div>
