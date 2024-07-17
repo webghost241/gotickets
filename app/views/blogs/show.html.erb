@@ -1,0 +1,14 @@
+<h1><%= @blog.title %></h1>
+<p><%= @blog.content %></p>
+
+<h2>Featured Events</h2>
+<ul>
+  <% @blog.events.each do |event| %>
+    <li>
+      <%= link_to event.title, event_path(event) %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'Edit', edit_blog_path(@blog) %>
+<%= link_to 'Back', blogs_path %>

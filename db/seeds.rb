@@ -55,13 +55,16 @@
 
 
 # db/seeds.rb
+# Clear existing data
+Event.destroy_all
+Blog.destroy_all
 
 # Create some users
-user1 = User.create!(email: 'user1@example.com', password: 'password', password_confirmation: 'password')
-user2 = User.create!(email: 'user2@example.com', password: 'password', password_confirmation: 'password')
-user3 = User.create!(email: 'user3@example.com', password: 'password', password_confirmation: 'password')
-user4 = User.create!(email: 'user4@example.com', password: 'password', password_confirmation: 'password')
-user5 = User.create!(email: 'user5@example.com', password: 'password', password_confirmation: 'password')
+user1 = User.create!(email: 'user100@example.com', password: 'password', password_confirmation: 'password')
+user2 = User.create!(email: 'user200@example.com', password: 'password', password_confirmation: 'password')
+user3 = User.create!(email: 'user300@example.com', password: 'password', password_confirmation: 'password')
+user4 = User.create!(email: 'user400@example.com', password: 'password', password_confirmation: 'password')
+user5 = User.create!(email: 'user500@example.com', password: 'password', password_confirmation: 'password')
 
 # Manual event creation
 Event.create!(
@@ -266,3 +269,32 @@ Event.create!(
 )
 
 puts "Created #{User.count} users and #{Event.count} events!"
+
+blogs = [
+{ title: "Highlights from the Rock Concert", content: "The Rock Concert at Madison Square Garden was a thrilling experience, featuring electrifying performances from top rock bands." },
+{ title: "Key Takeaways from the Tech Conference", content: "The Tech Conference at Moscone Center brought together tech enthusiasts and industry leaders for insightful talks and networking opportunities." },
+{ title: "Artistic Delights at the Art Festival", content: "The Art Festival at the Art Institute of Chicago showcased stunning art pieces and exhibitions, capturing the essence of contemporary art." },
+{ title: "Summer Vibes: A Recap of the Beach Party", content: "The Summer Party at Santa Monica Beach was a blast, filled with delicious food, refreshing drinks, and joyful company under the sun." },
+{ title: "Mastering Photography: Workshop Recap", content: "The Photography Workshop in Central Park provided aspiring photographers with valuable insights and hands-on learning from experts in the field." },
+{ title: "Startup Insights from the Meetup", content: "The Startup Meetup at WeWork San Francisco was a hub of entrepreneurial spirit, where startups exchanged ideas and fostered collaborations." },
+{ title: "Exploring Wellness Trends: Health Seminar Recap", content: "The Health Seminar at Hilton Hotel Miami explored the latest trends in health and wellness, offering attendees practical insights for a healthier lifestyle." },
+{ title: "Digital Marketing Insights from the Webinar", content: "The Online Webinar provided attendees with valuable insights into digital marketing strategies, equipping them with tools to enhance their online presence." },
+{ title: "Artistic Marvels: Exhibition Highlights", content: "The Art Exhibition at Los Angeles County Museum of Art featured captivating art pieces from emerging artists worldwide, showcasing diverse perspectives and creativity." },
+{ title: "Culinary Showdown: Cooking Competition Recap", content: "The Cooking Competition at Grand Hyatt Seattle was a fierce yet delicious event, where talented chefs showcased their culinary prowess." },
+{ title: "Rhythmic Delights: Jazz Festival Highlights", content: "The Jazz Festival at New Orleans Jazz & Heritage Festival was a celebration of jazz music, featuring performances that mesmerized the audience with their soulful rhythms and melodies." },
+{ title: "Literary Treasures: Book Fair Recap", content: "The Book Fair at Boston Convention and Exhibition Center offered book lovers a treasure trove of literary delights, with a diverse selection of books across various genres." },
+{ title: "Savoring the Grape: Wine Tasting Experience", content: "The Wine Tasting event in Napa Valley provided enthusiasts with a delightful journey through exquisite wines, showcasing the craftsmanship of local and international vineyards." },
+{ title: "Red Carpet Moments: Film Premiere Recap", content: "The Film Premiere at Grauman’s Chinese Theatre was a glamorous affair, where attendees enjoyed the debut of a highly anticipated blockbuster movie." },
+{ title: "Fashion Extravaganza: Show Highlights", content: "The Fashion Show at New York Fashion Week dazzled fashionistas with the latest trends from top designers, setting the stage for future style inspirations." },
+{ title: "Laughter Galore: Comedy Night Recap", content: "The Comedy Night at The Comedy Store delivered endless laughs with hilarious performances by renowned comedians, creating a memorable night of comedy." },
+{ title: "Zen Retreat: Yoga Retreat Experience", content: "The Yoga Retreat in Sedona provided a serene escape, allowing participants to unwind with yoga sessions and meditation practices amidst breathtaking natural beauty." },
+{ title: "Endurance Challenge: Marathon Recap", content: "The Marathon in Central Park tested participants’ endurance and determination, with runners pushing their limits in pursuit of personal milestones." },
+{ title: "Theatrical Brilliance: Theater Play Review", content: "The Theater Play on Broadway captivated audiences with its compelling storyline and stellar performances, showcasing the essence of live theatre." },
+{ title: "Innovative Wonders: Science Fair Highlights", content: "The Science Fair in Silicon Valley showcased innovative projects and experiments that captivated the curious minds of attendees, offering a glimpse into the future of science and technology." }
+]
+
+blogs.each do |blog_params|
+  Blog.create!(blog_params)
+  end
+  
+  puts "Created #{Blog.count} blogs!"

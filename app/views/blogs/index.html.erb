@@ -1,0 +1,26 @@
+<h1>Blogs</h1>
+
+<%= link_to 'New Blog', new_blog_path, class: "btn btn-primary" %>
+
+<div class="blogs">
+  <% @blogs.each do |blog| %>
+    <div class="blog">
+      <h2><%= link_to blog.title, blog_path(blog) %></h2>
+      <p><%= truncate(blog.content, length: 100) %></p>
+
+      <% if blog.events.any? %>
+        <h3>Featured Events:</h3>
+        <ul>
+          <% blog.events.each do |event| %>
+            <li><%= link_to event.title, event_path(event) %></li>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <%= link_to 'Edit', edit_blog_path(blog), class: "btn btn-secondary" %>
+      <%= link_to 'Delete', blog, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+    </div>
+  <% end %>
+</div>
+
+<%= link_to 'Back to Home', root_path, class: "btn btn-secondary" %>

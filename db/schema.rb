@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_14_101022) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_17_072510) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +21,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_14_101022) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_blog_posts_on_user_id"
+  end
+
+  create_table "blogs", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "blogs_events", id: false, force: :cascade do |t|
+    t.bigint "blog_id", null: false
+    t.bigint "event_id", null: false
+    t.index ["blog_id", "event_id"], name: "index_blogs_events_on_blog_id_and_event_id"
+    t.index ["event_id", "blog_id"], name: "index_blogs_events_on_event_id_and_blog_id"
   end
 
   create_table "bookings", force: :cascade do |t|
